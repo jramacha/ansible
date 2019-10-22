@@ -1,0 +1,7 @@
+[master]
+kube-master
+kube-node1
+
+[slave]
+kube-node2
+kube-node3

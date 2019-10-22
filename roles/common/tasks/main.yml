@@ -1,0 +1,18 @@
+- block:
+  - name: Install common dependencies
+    apt: name={{ item }} state=installed
+    with_items:
+      - sysstat
+      - dnsutils
+
+  - name: Configure DB config file
+    template: src=db.conf dest=/tmp/db.conf
+    tags: cron
+    notify: restart cron
+
+  - name: Start the cron service
+    service: name=cron state=started enabled=yes
+    tags: cron
+
+  become: yes
+  become_method: sudo
